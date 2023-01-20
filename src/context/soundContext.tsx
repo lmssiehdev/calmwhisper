@@ -7,6 +7,8 @@ interface ISoundContext {
   isMute: boolean;
   setIsMute: (v: boolean) => void;
   addSound: (name: string) => void;
+  currentPlaylistName: string;
+  setCurrentPlaylistName: React.Dispatch<React.SetStateAction<string>>;
   currentSoundsPlaying: TPlayingSounds;
   setCurrentSoundsPlaying: React.Dispatch<React.SetStateAction<TPlayingSounds>>;
 }
@@ -17,12 +19,15 @@ function SoundProvider({ children }: { children: ReactNode }) {
   const [isMute, setIsMute] = useState(false);
   const [currentSoundsPlaying, setCurrentSoundsPlaying] =
     useState<TPlayingSounds>({});
+  const [currentPlaylistName, setCurrentPlaylistName] =
+    useState<string>("Not saved");
   const favorites = useFavoritesStore((state) => state.favorites);
   const [showFavorites, setShowFavorites] = useState(false);
 
   // Todo:  refactor with useReducer
   const addSound = (name: string) => {
     setIsMute(false);
+    setCurrentPlaylistName("Not saved");
     const sound = currentSoundsPlaying[name];
 
     if (sound) {
@@ -51,6 +56,8 @@ function SoundProvider({ children }: { children: ReactNode }) {
         addSound,
         currentSoundsPlaying,
         setCurrentSoundsPlaying,
+        currentPlaylistName,
+        setCurrentPlaylistName,
       }}
     >
       {children}

@@ -1,16 +1,21 @@
 "use client";
 
-import { PlayIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { useFavoritesStore, TPlayingSounds } from "@/stores/FavoritesStore";
 import { useSoundContext } from "@/context/soundContext";
+import { TPlayingSounds, useFavoritesStore } from "@/stores/FavoritesStore";
+import { PlayIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 function Favorites({ closeModal }: { closeModal?: () => void }) {
   const favorites = useFavoritesStore((state) => state.favorites);
   const deleteFavorite = useFavoritesStore((state) => state.deleteFavorite);
-  const { currentSoundsPlaying, setCurrentSoundsPlaying } = useSoundContext();
+  const {
+    currentSoundsPlaying,
+    setCurrentPlaylistName,
+    setCurrentSoundsPlaying,
+  } = useSoundContext();
 
-  function handlePlay(sounds: TPlayingSounds) {
+  function handlePlay(key: string, sounds: TPlayingSounds) {
     setCurrentSoundsPlaying(sounds);
+    setCurrentPlaylistName(key);
     closeModal && closeModal();
   }
 
@@ -24,7 +29,7 @@ function Favorites({ closeModal }: { closeModal?: () => void }) {
             key={key}
             name={key}
             deleteFavorite={() => deleteFavorite(key)}
-            playFavorite={() => handlePlay(sounds)}
+            playFavorite={() => handlePlay(key, sounds)}
             item={sounds}
           />
         );

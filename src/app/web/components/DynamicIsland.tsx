@@ -57,19 +57,6 @@ function DialogDemo({
               // @ts-ignore
               React.cloneElement(dialogAction, { title, close })}
           </Dialog.Overlay>
-          <div
-            style={{
-              display: "flex",
-              marginTop: 25,
-              justifyContent: "flex-end",
-            }}
-          >
-            <Dialog.Close asChild>
-              <Button size="base" color="primary">
-                Save Change
-              </Button>
-            </Dialog.Close>
-          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
@@ -77,7 +64,7 @@ function DialogDemo({
 }
 
 function AddFavorite({ title, close }: { title: string; close?: () => {} }) {
-  const { currentSoundsPlaying } = useSoundContext();
+  const { currentSoundsPlaying, setCurrentPlaylistName } = useSoundContext();
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const addFavorite = useFavoritesStore((state) => state.addFavorite);
@@ -88,6 +75,7 @@ function AddFavorite({ title, close }: { title: string; close?: () => {} }) {
     }
 
     addFavorite(name, currentSoundsPlaying);
+    setCurrentPlaylistName(name);
 
     close && close();
   };
@@ -113,6 +101,11 @@ function AddFavorite({ title, close }: { title: string; close?: () => {} }) {
           className="w-full flex-1 inline-flex items-center justify-center rounded px-2 font-medium leading-normal h-[35px] shadow-[0_0_0_1px] shadow-gray-400 focus:shadow-orange-400 focus:shadow-[0_0_0_2px] mx-1"
         />
       </fieldset>
+      <div className="flex justify-end mt-7">
+        <Button size="base" color="primary" onClick={handleClose}>
+          Save Change
+        </Button>
+      </div>
     </>
   );
 }
@@ -128,12 +121,12 @@ function FavoritesDialog({
 }
 
 export default function IslandContent() {
-  const { isMute, setIsMute } = useSoundContext();
+  const { isMute, setIsMute, currentPlaylistName } = useSoundContext();
 
   return (
     <>
       <div className=" bg-orange-500 text-white m-auto rounded-full py-2 px-4 flex items-center justify-between z-20">
-        Not named
+        {currentPlaylistName}
         <div className="flex items-center gap-6 md:gap-2">
           {isMute ? (
             <button onClick={() => setIsMute(false)}>
