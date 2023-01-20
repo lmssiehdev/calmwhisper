@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import classNames from "classnames";
 import Link from "next/link";
+import Image from "next/image";
 import {
   AdjustmentsHorizontalIcon,
   ArrowSmallRightIcon,
@@ -48,7 +49,7 @@ export default function Home() {
       <div className="max-w-[1200px] mx-auto">
         <Navbar />
       </div>
-      <header className="my-16 text-center max-h-[100vh] overflow-hidden border-b-4 border-solid border-orange-500">
+      <header className="my-16 text-center overflow-hidden border-b-4 border-solid border-orange-500">
         <h1 className=" text-3xl md:leading-snug font-bold md:text-5xl ">
           Escape the Noise,
           <br /> Create your own Soundscape.
@@ -59,12 +60,17 @@ export default function Home() {
         </p> */}
         <Link
           href="/web"
-          className="mx-auto my-12 cursor-pointer inline-flex items-center gap-2 rounded bg-orange-500 hover:bg-orange-400 hover:shadow-md font-bold py-3 px-4 text-white shadow-sm shadow-gray-800"
+          className="mx-auto my-12 cursor-pointer inline-flex items-center gap-2 rounded bg-orange-500 hover:bg-orange-400 hover:shadow-md font-bold  py-3 px-4 text-white shadow-sm shadow-gray-800"
         >
           Get Started <ArrowSmallRightIcon className="h-5 w-5" />
         </Link>
-        <div className="max-w-[400px] overflow-hidden rounded-3xl border-4 border-orange-500 border-solid mx-auto">
-          <img className="w-full h-full " src="/images/mobile_ss.png" />
+        <div className="relative max-w-[400px] h-[600px] overflow-hidden rounded-t-3xl border-4 border-b-0 border-orange-500 border-solid mx-auto">
+          <Image
+            src="/images/mobile_ss.png"
+            alt="preview"
+            className="object-cover object-top"
+            fill
+          />
         </div>
       </header>
       <section className="my-40 max-w-[1200px] mx-auto">
