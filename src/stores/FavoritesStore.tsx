@@ -17,16 +17,20 @@ favorites = {
 
 */
 
-type TSound = {
+export type TSound = {
   name: string;
   volume: number;
 };
 
+export type TPlayingSounds = {
+  [id: string]: TSound;
+};
+
 interface IFavoritesState {
   favorites: {
-    [id: string]: TSound;
+    [id: string]: TPlayingSounds;
   };
-  addFavorite: (id: string, payload: TSound) => void;
+  addFavorite: (id: string, payload: TPlayingSounds) => void;
   deleteFavorite: (id: string) => void;
 }
 
