@@ -70,7 +70,14 @@ function AddFavorite({ title, close }: { title: string; close?: () => {} }) {
   const addFavorite = useFavoritesStore((state) => state.addFavorite);
 
   const handleClose = () => {
+    console.log(Object.keys(currentSoundsPlaying).length);
     if (name.length == 0) {
+      setError("Please provide a name.");
+      return;
+    }
+
+    if (Object.keys(currentSoundsPlaying).length == 0) {
+      setError("Please select at least one sound.");
       return;
     }
 
@@ -101,6 +108,7 @@ function AddFavorite({ title, close }: { title: string; close?: () => {} }) {
           className="w-full flex-1 inline-flex items-center justify-center rounded px-2 font-medium leading-normal h-[35px] shadow-[0_0_0_1px] shadow-gray-400 focus:shadow-orange-400 focus:shadow-[0_0_0_2px] mx-1"
         />
       </fieldset>
+      <div className="text-center text-red-400">{error}</div>
       <div className="flex justify-end mt-7">
         <Button size="base" color="primary" onClick={handleClose}>
           Save Change
