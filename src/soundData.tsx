@@ -54,11 +54,11 @@ export const soundData: ISoundData = [
     icon: "/icons/storm.svg",
   },
 
-  {
-    name: "stream",
-    sound: "/sounds/stream.ogg",
-    icon: "/icons/stream.svg",
-  },
+  // {
+  //   name: "stream",
+  //   sound: "/sounds/stream.ogg",
+  //   icon: "/icons/stream.svg",
+  // },
 
   {
     name: "summer-night",
@@ -66,11 +66,11 @@ export const soundData: ISoundData = [
     icon: "/icons/summer-night.svg",
   },
 
-  {
-    name: "train",
-    sound: "/sounds/train.ogg",
-    icon: "/icons/train.svg",
-  },
+  // {
+  //   name: "train",
+  //   sound: "/sounds/train.ogg",
+  //   icon: "/icons/train.svg",
+  // },
 
   {
     name: "waves",
