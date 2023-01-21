@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import "./global.css";
 import localFont from "@next/font/local";
+import { AnalyticsWrapper } from "@/components/Analytics";
 
 const Avenir = localFont({
   variable: "--font-avenir",
@@ -32,6 +33,7 @@ export default function RootLayout({
         className={`${Avenir.variable} font-sans min-h-[100vh] px-2 !mx-auto bg-[#393E46] text-white relative`}
       >
         {children}
+        <AnalyticsWrapper />
       </body>
     </html>
   );
