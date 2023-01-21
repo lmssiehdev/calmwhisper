@@ -60,6 +60,7 @@ export default function SoundCard({ item, isMute, addSound }: Props) {
               src={sound}
               volume={currentSoundsPlaying[name]?.volume}
               loop={true}
+              html5={true}
             />
           </>
         )}
