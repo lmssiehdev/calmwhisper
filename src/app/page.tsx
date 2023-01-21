@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import classNames from "classnames";
 import Link from "next/link";
 import Image from "next/image";
+import Footer from "../components/Footer";
 import {
   AdjustmentsHorizontalIcon,
   ArrowSmallRightIcon,
@@ -89,9 +90,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <footer className="text-gray-300 py-4 text-center">
-        Made with ❤️ in Morocco
-      </footer>
+      <Footer />
     </>
   );
 }
