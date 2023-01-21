@@ -1,15 +1,14 @@
 # Yume
+![preview](https://raw.githubusercontent.com/lmssiehdev/yume/main/preview.png)
 
 ## Getting Started
 
-First, run the development server:
+First, clone this repo and install dependecies with `npm install` then
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
