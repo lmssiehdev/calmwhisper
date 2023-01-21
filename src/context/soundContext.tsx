@@ -7,6 +7,7 @@ interface ISoundContext {
   isMute: boolean;
   setIsMute: (v: boolean) => void;
   addSound: (name: string) => void;
+  updateVolume: (name: string, volume: number) => void;
   currentPlaylistName: string;
   setCurrentPlaylistName: React.Dispatch<React.SetStateAction<string>>;
   currentSoundsPlaying: TPlayingSounds;
@@ -48,6 +49,16 @@ function SoundProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const updateVolume = (name: string, volume: number) => {
+    setCurrentSoundsPlaying((soundsPlaying) => {
+      soundsPlaying[name].volume = volume;
+
+      return {
+        ...soundsPlaying,
+      };
+    });
+  };
+
   return (
     <soundContext.Provider
       value={{
@@ -58,6 +69,7 @@ function SoundProvider({ children }: { children: ReactNode }) {
         setCurrentSoundsPlaying,
         currentPlaylistName,
         setCurrentPlaylistName,
+        updateVolume,
       }}
     >
       {children}

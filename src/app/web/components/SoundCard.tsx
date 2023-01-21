@@ -14,12 +14,14 @@ type Props = {
 
 export default function SoundCard({ item, isMute, addSound }: Props) {
   const { name, sound, icon } = item;
-  const { currentSoundsPlaying } = useSoundContext();
-  const [soundPlaying, setSoundPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
+  const { currentSoundsPlaying, updateVolume } = useSoundContext();
 
   const handleIconClick = () => {
     addSound(name);
+  };
+
+  const handleVolumeChange = (value: number) => {
+    updateVolume(name, value);
   };
 
   return (
@@ -41,17 +43,22 @@ export default function SoundCard({ item, isMute, addSound }: Props) {
         <div
           className={classNames(
             { invisible: !currentSoundsPlaying[name] },
-            "w-full pt-3 max-w-[100px]"
+            "w-full pt-3 max-w-[100px] h-10"
           )}
         >
-          <VolumeSlider handleValueChange={setVolume} />
+          {currentSoundsPlaying[name] && (
+            <VolumeSlider
+              defaultValue={currentSoundsPlaying[name]?.volume}
+              handleValueChange={handleVolumeChange}
+            />
+          )}
         </div>
         {currentSoundsPlaying[name] && (
           <>
             <ReactHowler
               playing={!isMute}
               src={sound}
-              volume={volume}
+              volume={currentSoundsPlaying[name]?.volume}
               loop={true}
             />
           </>
