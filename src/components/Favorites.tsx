@@ -21,19 +21,23 @@ function Favorites({ closeModal }: { closeModal?: () => void }) {
 
   return (
     <>
-      {Object.keys(favorites).map((key) => {
-        const sounds = favorites[key];
+      {Object.keys(favorites).length == 0 ? (
+        <div className="text-center py-5">No favorites saved yet.</div>
+      ) : (
+        Object.keys(favorites).map((key) => {
+          const sounds = favorites[key];
 
-        return (
-          <Favorite
-            key={key}
-            name={key}
-            deleteFavorite={() => deleteFavorite(key)}
-            playFavorite={() => handlePlay(key, sounds)}
-            item={sounds}
-          />
-        );
-      })}
+          return (
+            <Favorite
+              key={key}
+              name={key}
+              deleteFavorite={() => deleteFavorite(key)}
+              playFavorite={() => handlePlay(key, sounds)}
+              item={sounds}
+            />
+          );
+        })
+      )}
     </>
   );
 }
