@@ -53,7 +53,6 @@ export const soundData: ISoundData = [
     sound: "/sounds/storm.ogg",
     icon: "/icons/storm.svg",
   },
-
   // {
   //   name: "stream",
   //   sound: "/sounds/stream.ogg",
