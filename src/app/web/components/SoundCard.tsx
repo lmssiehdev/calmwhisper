@@ -34,7 +34,7 @@ export default function SoundCard({ item, isMute, addSound }: Props) {
               {
                 "opacity-60": !isHovered && !currentSoundsPlaying[name],
               },
-              "inline-block w-full"
+              "inline-block w-full cursor-pointer"
             )}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
