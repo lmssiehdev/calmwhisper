@@ -7,20 +7,16 @@ import { PlayIcon, TrashIcon } from "@heroicons/react/24/solid";
 function Favorites({ closeModal }: { closeModal?: () => void }) {
   const favorites = useFavoritesStore((state) => state.favorites);
   const deleteFavorite = useFavoritesStore((state) => state.deleteFavorite);
-  const {
-    currentSoundsPlaying,
-    setCurrentPlaylistName,
-    setCurrentSoundsPlaying,
-  } = useSoundContext();
+  const { dispatch } = useSoundContext();
 
   function handlePlay(key: string, sounds: TPlayingSounds) {
-    setCurrentSoundsPlaying(sounds);
-    setCurrentPlaylistName(key);
+    dispatch({ type: "APPLY_FAVORITES", name: key, sounds: { ...sounds } });
     closeModal && closeModal();
   }
 
   return (
     <>
+      {JSON.stringify(favorites)}
       {Object.keys(favorites).length == 0 ? (
         <div className="text-center py-5">No favorites saved yet.</div>
       ) : (

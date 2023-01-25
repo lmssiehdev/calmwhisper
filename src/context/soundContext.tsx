@@ -1,77 +1,113 @@
 "use client";
 
-import { createContext, ReactNode, useState, useContext } from "react";
-import { TPlayingSounds, useFavoritesStore } from "@/stores/FavoritesStore";
+import { TPlayingSounds } from "@/stores/FavoritesStore";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  useContext,
+  useReducer,
+} from "react";
 
 interface ISoundContext {
   isMute: boolean;
-  setIsMute: (v: boolean) => void;
-  addSound: (name: string) => void;
-  updateVolume: (name: string, volume: number) => void;
-  currentPlaylistName: string;
-  setCurrentPlaylistName: React.Dispatch<React.SetStateAction<string>>;
   currentSoundsPlaying: TPlayingSounds;
-  setCurrentSoundsPlaying: React.Dispatch<React.SetStateAction<TPlayingSounds>>;
+  currentPlaylistName: string;
+  setCurrentPlaylistName: (name: string) => void;
+  dispatch: Dispatch<TAction>;
 }
 
 export const soundContext = createContext<ISoundContext | undefined>(undefined);
 
-function SoundProvider({ children }: { children: ReactNode }) {
-  const [isMute, setIsMute] = useState(false);
-  const [currentSoundsPlaying, setCurrentSoundsPlaying] =
-    useState<TPlayingSounds>({});
-  const [currentPlaylistName, setCurrentPlaylistName] =
-    useState<string>("Not saved");
-  const favorites = useFavoritesStore((state) => state.favorites);
-  const [showFavorites, setShowFavorites] = useState(false);
+const initialState = {
+  currentSoundsPlaying: {} as TPlayingSounds,
+  currentPlaylistName: "Not Saved",
+  isMute: false,
+};
 
-  // Todo:  refactor with useReducer
-  const addSound = (name: string) => {
-    setIsMute(false);
-    setCurrentPlaylistName("Not saved");
-    const sound = currentSoundsPlaying[name];
+type TAction =
+  | { type: "MUTE_SOUNDS"; value: boolean }
+  | { type: "APPLY_FAVORITES"; name: string; sounds: TPlayingSounds }
+  | { type: "TOGGLE_SOUND"; name: string }
+  | { type: "UPDATE_VOLUME"; name: string; volume: number };
 
-    if (sound) {
-      setCurrentSoundsPlaying((soundsPlaying) => {
-        delete soundsPlaying[name];
-        return {
-          ...soundsPlaying,
-        };
-      });
-    } else {
-      setCurrentSoundsPlaying((soundsPlaying) => ({
-        ...soundsPlaying,
-        [name]: {
-          name,
-          volume: 1,
-        },
-      }));
+function reducer(state: typeof initialState, action: TAction) {
+  switch (action.type) {
+    case "MUTE_SOUNDS": {
+      return {
+        ...state,
+        isMute: action.value,
+      };
     }
-  };
+    case "APPLY_FAVORITES": {
+      console.log(action.sounds);
+      return {
+        ...state,
+        currentSoundsPlaying: { ...action.sounds },
+        currentPlaylistName: action.name,
+      };
+    }
+    case "TOGGLE_SOUND": {
+      state.currentPlaylistName = "Not Saved";
 
-  const updateVolume = (name: string, volume: number) => {
-    setCurrentSoundsPlaying((soundsPlaying) => {
-      soundsPlaying[name].volume = volume;
+      if (state.currentSoundsPlaying[action.name]) {
+        const obj = { ...state.currentSoundsPlaying };
+        delete obj[action.name];
+        return {
+          ...state,
+          currentSoundsPlaying: { ...obj },
+        };
+        // load = {
+        //   ...state.currentSoundsPlaying[action.name],
+        //   isPlaying: !state.currentSoundsPlaying[action.name].isPlaying,
+        // };
+      }
 
       return {
-        ...soundsPlaying,
+        ...state,
+        currentSoundsPlaying: {
+          ...state.currentSoundsPlaying,
+          [action.name]: {
+            name: action.name,
+            volume: 1,
+          },
+        },
       };
-    });
-  };
+    }
+    case "UPDATE_VOLUME": {
+      return {
+        ...state,
+        currentSoundsPlaying: {
+          ...state.currentSoundsPlaying,
+          [action.name]: {
+            ...state.currentSoundsPlaying[action.name],
+            volume: action.volume,
+          },
+        },
+        isMute: false,
+      };
+    }
+    default: {
+      throw new Error("Please provide an action type");
+    }
+  }
+}
+
+function SoundProvider({ children }: { children: ReactNode }) {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <soundContext.Provider
       value={{
-        isMute,
-        setIsMute,
-        addSound,
-        currentSoundsPlaying,
-        setCurrentSoundsPlaying,
-        currentPlaylistName,
-        setCurrentPlaylistName,
-        updateVolume,
+        isMute: state.isMute,
+        currentSoundsPlaying: state.currentSoundsPlaying,
+        currentPlaylistName: state.currentPlaylistName,
+        setCurrentPlaylistName: (name) => (state.currentPlaylistName = name),
+        dispatch,
       }}
     >
+      {JSON.stringify(state.currentSoundsPlaying)}
+
       {children}
     </soundContext.Provider>
   );

@@ -8,21 +8,19 @@ import { useState } from "react";
 
 type Props = {
   item: any;
-  isMute: boolean;
-  addSound: (name: string) => void;
 };
 
-export default function SoundCard({ item, isMute, addSound }: Props) {
+export default function SoundCard({ item }: Props) {
   const { name, sound, icon } = item;
   const [isHovered, setIsHovered] = useState(false);
-  const { currentSoundsPlaying, updateVolume } = useSoundContext();
+  const { currentSoundsPlaying, dispatch, isMute } = useSoundContext();
 
   const handleIconClick = () => {
-    addSound(name);
+    dispatch({ type: "TOGGLE_SOUND", name });
   };
 
-  const handleVolumeChange = (value: number) => {
-    updateVolume(name, value);
+  const handleVolumeChange = (volume: number) => {
+    dispatch({ type: "UPDATE_VOLUME", name, volume });
   };
 
   return (
@@ -58,22 +56,20 @@ export default function SoundCard({ item, isMute, addSound }: Props) {
           )}
         >
           {currentSoundsPlaying[name] && (
-            <VolumeSlider
-              defaultValue={currentSoundsPlaying[name]?.volume}
-              handleValueChange={handleVolumeChange}
-            />
+            <>
+              <VolumeSlider
+                value={currentSoundsPlaying[name]?.volume}
+                handleValueChange={handleVolumeChange}
+              />
+              <ReactHowler
+                playing={!isMute}
+                src={sound}
+                volume={currentSoundsPlaying[name]?.volume}
+                loop={true}
+              />
+            </>
           )}
         </div>
-        {currentSoundsPlaying[name] && (
-          <>
-            <ReactHowler
-              playing={!isMute}
-              src={sound}
-              volume={currentSoundsPlaying[name]?.volume}
-              loop={true}
-            />
-          </>
-        )}
       </div>
     </>
   );
