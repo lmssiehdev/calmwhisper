@@ -49,28 +49,26 @@ function reducer(state: typeof initialState, action: TAction) {
     }
     case "TOGGLE_SOUND": {
       state.currentPlaylistName = "Not Saved";
+      let load;
 
       if (state.currentSoundsPlaying[action.name]) {
-        const obj = { ...state.currentSoundsPlaying };
-        delete obj[action.name];
-        return {
-          ...state,
-          currentSoundsPlaying: { ...obj },
+        load = {
+          ...state.currentSoundsPlaying[action.name],
+          isPlaying: !state.currentSoundsPlaying[action.name].isPlaying,
         };
-        // load = {
-        //   ...state.currentSoundsPlaying[action.name],
-        //   isPlaying: !state.currentSoundsPlaying[action.name].isPlaying,
-        // };
+      } else {
+        load = {
+          name: action.name,
+          volume: 1,
+          isPlaying: true,
+        };
       }
 
       return {
         ...state,
         currentSoundsPlaying: {
           ...state.currentSoundsPlaying,
-          [action.name]: {
-            name: action.name,
-            volume: 1,
-          },
+          [action.name]: load,
         },
       };
     }
@@ -106,8 +104,6 @@ function SoundProvider({ children }: { children: ReactNode }) {
         dispatch,
       }}
     >
-      {JSON.stringify(state.currentSoundsPlaying)}
-
       {children}
     </soundContext.Provider>
   );

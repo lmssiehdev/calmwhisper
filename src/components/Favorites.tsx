@@ -16,7 +16,6 @@ function Favorites({ closeModal }: { closeModal?: () => void }) {
 
   return (
     <>
-      {JSON.stringify(favorites)}
       {Object.keys(favorites).length == 0 ? (
         <div className="text-center py-5">No favorites saved yet.</div>
       ) : (

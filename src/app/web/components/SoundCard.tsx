@@ -30,7 +30,8 @@ export default function SoundCard({ item }: Props) {
           <button
             className={classNames(
               {
-                "opacity-60": !isHovered && !currentSoundsPlaying[name],
+                "opacity-60":
+                  !isHovered && !currentSoundsPlaying[name]?.isPlaying,
               },
               "inline-block w-full cursor-pointer"
             )}
@@ -55,7 +56,7 @@ export default function SoundCard({ item }: Props) {
             "w-full pt-3 max-w-[100px] h-10"
           )}
         >
-          {currentSoundsPlaying[name] && (
+          {currentSoundsPlaying[name]?.isPlaying && (
             <>
               <VolumeSlider
                 value={currentSoundsPlaying[name]?.volume}
