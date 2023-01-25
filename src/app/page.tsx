@@ -1,14 +1,13 @@
 import Navbar from "@/components/Navbar";
-import classNames from "classnames";
-import Link from "next/link";
-import Image from "next/image";
-import Footer from "../components/Footer";
 import {
   AdjustmentsHorizontalIcon,
   ArrowSmallRightIcon,
   BuildingLibraryIcon,
   ClockIcon,
 } from "@heroicons/react/24/solid";
+import Image from "next/image";
+import Link from "next/link";
+import Footer from "../components/Footer";
 
 const features = [
   {

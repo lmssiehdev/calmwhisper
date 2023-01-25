@@ -8,21 +8,19 @@ import { useState } from "react";
 
 type Props = {
   item: any;
-  isMute: boolean;
-  addSound: (name: string) => void;
 };
 
-export default function SoundCard({ item, isMute, addSound }: Props) {
+export default function SoundCard({ item }: Props) {
   const { name, sound, icon } = item;
   const [isHovered, setIsHovered] = useState(false);
-  const { currentSoundsPlaying, updateVolume } = useSoundContext();
+  const { currentSoundsPlaying, dispatch, isMute } = useSoundContext();
 
   const handleIconClick = () => {
-    addSound(name);
+    dispatch({ type: "TOGGLE_SOUND", name });
   };
 
-  const handleVolumeChange = (value: number) => {
-    updateVolume(name, value);
+  const handleVolumeChange = (volume: number) => {
+    dispatch({ type: "UPDATE_VOLUME", name, volume });
   };
 
   return (
@@ -32,7 +30,8 @@ export default function SoundCard({ item, isMute, addSound }: Props) {
           <button
             className={classNames(
               {
-                "opacity-60": !isHovered && !currentSoundsPlaying[name],
+                "opacity-60":
+                  !isHovered && !currentSoundsPlaying[name]?.isPlaying,
               },
               "inline-block w-full cursor-pointer"
             )}
@@ -57,23 +56,21 @@ export default function SoundCard({ item, isMute, addSound }: Props) {
             "w-full pt-3 max-w-[100px] h-10"
           )}
         >
-          {currentSoundsPlaying[name] && (
-            <VolumeSlider
-              defaultValue={currentSoundsPlaying[name]?.volume}
-              handleValueChange={handleVolumeChange}
-            />
+          {currentSoundsPlaying[name]?.isPlaying && (
+            <>
+              <VolumeSlider
+                value={currentSoundsPlaying[name]?.volume}
+                handleValueChange={handleVolumeChange}
+              />
+              <ReactHowler
+                playing={!isMute}
+                src={sound}
+                volume={currentSoundsPlaying[name]?.volume}
+                loop={true}
+              />
+            </>
           )}
         </div>
-        {currentSoundsPlaying[name] && (
-          <>
-            <ReactHowler
-              playing={!isMute}
-              src={sound}
-              volume={currentSoundsPlaying[name]?.volume}
-              loop={true}
-            />
-          </>
-        )}
       </div>
     </>
   );

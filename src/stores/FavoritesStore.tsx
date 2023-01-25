@@ -20,6 +20,7 @@ favorites = {
 export type TSound = {
   name: string;
   volume: number;
+  isPlaying: boolean;
 };
 
 export type TPlayingSounds = {

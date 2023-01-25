@@ -2,19 +2,16 @@ import * as Slider from "@radix-ui/react-slider";
 import { useEffect } from "react";
 
 type Props = {
-  defaultValue: number;
+  value: number;
   handleValueChange: (volume: number) => void;
 };
 
-export default function VolumeSlider({
-  defaultValue,
-  handleValueChange,
-}: Props) {
+export default function VolumeSlider({ value, handleValueChange }: Props) {
   return (
     <form>
       <Slider.Root
         className="SliderRoot"
-        defaultValue={[defaultValue]}
+        value={[value]}
         max={1}
         min={0}
         step={0.1}

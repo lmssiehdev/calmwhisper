@@ -129,7 +129,11 @@ function FavoritesDialog({
 }
 
 export default function IslandContent() {
-  const { isMute, setIsMute, currentPlaylistName } = useSoundContext();
+  const { isMute, currentPlaylistName, dispatch } = useSoundContext();
+
+  function setIsMute(value: boolean) {
+    dispatch({ type: "MUTE_SOUNDS", value });
+  }
 
   return (
     <>
