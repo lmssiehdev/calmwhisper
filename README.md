@@ -1,5 +1,6 @@
-# Yume
-![preview](https://raw.githubusercontent.com/lmssiehdev/yume/main/preview.png)
+# Cozy
+
+![preview](https://raw.githubusercontent.com/lmssiehdev/Cozy/main/preview.png)
 
 ## Getting Started
 
