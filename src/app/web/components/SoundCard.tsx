@@ -1,10 +1,10 @@
 "use client";
 
+import { useSoundContext } from "@/context/soundContext";
 import classNames from "classnames";
-import { useState } from "react";
 import ReactHowler from "react-howler";
 import VolumeSlider from "./VolumeSlider";
-import { useSoundContext } from "@/context/soundContext";
+import { useState } from "react";
 
 type Props = {
   item: any;
@@ -14,6 +14,7 @@ type Props = {
 
 export default function SoundCard({ item, isMute, addSound }: Props) {
   const { name, sound, icon } = item;
+  const [isHovered, setIsHovered] = useState(false);
   const { currentSoundsPlaying, updateVolume } = useSoundContext();
 
   const handleIconClick = () => {
@@ -28,7 +29,17 @@ export default function SoundCard({ item, isMute, addSound }: Props) {
     <>
       <div className="select-none flex flex-col p-4 justify-center items-center">
         <div className="w-[65px]">
-          <button className=" inline-block w-full" onClick={handleIconClick}>
+          <button
+            className={classNames(
+              {
+                "opacity-60": !isHovered && !currentSoundsPlaying[name],
+              },
+              "inline-block w-full cursor-pointer"
+            )}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={handleIconClick}
+          >
             {/*             
             // Todo: render svg instead of an img which will enable changing with the fill property
             */}
