@@ -5,7 +5,7 @@ export default function Footer() {
       <span className="block pt-1">
         <a
           className="underline underline-offset-2 hover:text-orange-500"
-          href="https://github.com/lmssiehdev/yume"
+          href="https://github.com/lmssiehdev/Cosy"
           target="_blank"
           rel="noreferrer"
         >
