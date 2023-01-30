@@ -1,6 +1,6 @@
-# Cosy
+# Calm Whisper
 
-![preview](https://raw.githubusercontent.com/lmssiehdev/Cosy/main/preview.png)
+![preview](https://raw.githubusercontent.com/lmssiehdev/calmwhisper/main/preview.png)
 
 ## Getting Started
 
