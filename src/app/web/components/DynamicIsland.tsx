@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/24/solid";
 import * as Dialog from "@radix-ui/react-dialog";
 import React, { useEffect, useState } from "react";
+import PwaInstallButton from "./PwaInstallButton";
 import { Button } from "./ui/Button";
 
 function DialogDemo({
@@ -159,6 +160,7 @@ export default function IslandContent() {
             dialogTrigger={<HeartIcon className="h-5 w-5" />}
             dialogAction={<FavoritesDialog title="Favorites" />}
           />
+          <PwaInstallButton />
         </div>
       </div>
     </>
