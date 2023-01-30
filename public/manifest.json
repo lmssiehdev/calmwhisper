@@ -1,6 +1,6 @@
 {
-  "name": "PWA App",
-  "short_name": "App",
+  "name": "Calm Whisper",
+  "short_name": "calm_whisper",
   "icons": [
     {
       "src": "/android-chrome-512x512.png",
