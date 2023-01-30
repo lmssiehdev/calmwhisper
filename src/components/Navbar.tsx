@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <>
       <div className="flex justify-between text-white py-4">
-        <h1 className="text-2xl font-bold">Cosy</h1>
+        <h1 className="text-2xl font-bold">Calm Whisper</h1>
       </div>
     </>
   );

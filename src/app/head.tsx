@@ -1,7 +1,10 @@
 export default function Head() {
   return (
     <>
-      <title>Cosy</title>
+      <title>
+        Calm Whisper: Ambient Sounds for Relaxation, Stress Relief, and Improved
+        Productivity
+      </title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta
         name="description"
@@ -58,22 +61,22 @@ export default function Head() {
       />
       <link rel="shortcut icon" href="/favicon.ico" />
       <meta name="twitter:card" content="summary" />
-      <meta name="twitter:url" content="https://cosynoise.com" />
+      <meta name="twitter:url" content="https://calmwhisper.com" />
       <meta name="twitter:title" content="PWA App" />
       <meta name="twitter:description" content="Best PWA App in the world" />
       <meta
         name="twitter:image"
-        content="https://cosynoise.com/icons/android-chrome-192x192.png"
+        content="https://calmwhisper.com/icons/android-chrome-192x192.png"
       />
       <meta name="twitter:creator" content="@DavidWShadow" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content="PWA App" />
       <meta property="og:description" content="Best PWA App in the world" />
       <meta property="og:site_name" content="PWA App" />
-      <meta property="og:url" content="https://cosynoise.com" />
+      <meta property="og:url" content="https://calmwhisper.com" />
       <meta
         property="og:image"
-        content="https://cosynoise.com/icons/apple-touch-icon.png"
+        content="https://calmwhisper.com/icons/apple-touch-icon.png"
       />
     </>
   );
