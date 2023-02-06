@@ -40,6 +40,7 @@ export default function SoundCard({ item, isMute, addSound }: Props) {
             />
           </button>
         </div>
+        {name}
         <div
           className={classNames(
             { invisible: !currentSoundsPlaying[name] },
