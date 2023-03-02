@@ -37,9 +37,9 @@ export const soundData: ISoundData = [
   },
 
   {
-    name: "pink-noise",
-    sound: "/sounds/pink-noise.ogg",
-    icon: "/icons/pink-noise.svg",
+    name: "wind",
+    sound: "/sounds/wind.ogg",
+    icon: "/icons/wind.svg",
   },
 
   {
@@ -85,8 +85,8 @@ export const soundData: ISoundData = [
   },
 
   {
-    name: "wind",
-    sound: "/sounds/wind.ogg",
-    icon: "/icons/wind.svg",
+    name: "pink-noise",
+    sound: "/sounds/pink-noise.ogg",
+    icon: "/icons/pink-noise.svg",
   },
 ];
