@@ -130,7 +130,8 @@ function FavoritesDialog({
 }
 
 export default function IslandContent() {
-  const { isMute, currentPlaylistName, dispatch } = useSoundContext();
+  const { isMute, currentPlaylistName, dispatch, currentSoundsPlaying } =
+    useSoundContext();
 
   function setIsMute(value: boolean) {
     dispatch({ type: "MUTE_SOUNDS", value });
@@ -141,15 +142,22 @@ export default function IslandContent() {
       <div className=" bg-orange-500 text-white m-auto rounded-full py-2 px-4 flex items-center justify-between z-20">
         {currentPlaylistName}
         <div className="flex items-center gap-6 md:gap-2">
-          {isMute ? (
-            <button onClick={() => setIsMute(false)}>
-              <PlayIcon className="h-5 w-5" />
-            </button>
-          ) : (
-            <button onClick={() => setIsMute(true)}>
-              <PauseIcon className="h-5 w-5" />
-            </button>
+          {Object.keys(currentSoundsPlaying).some(
+            (item) => currentSoundsPlaying[item].isPlaying
+          ) && (
+            <>
+              {isMute ? (
+                <button onClick={() => setIsMute(false)}>
+                  <PlayIcon className="h-5 w-5" />
+                </button>
+              ) : (
+                <button onClick={() => setIsMute(true)}>
+                  <PauseIcon className="h-5 w-5" />
+                </button>
+              )}
+            </>
           )}
+
           <DialogDemo
             title="Add To Favorite"
             dialogTrigger={<StarIcon className="h-5 w-5" />}
