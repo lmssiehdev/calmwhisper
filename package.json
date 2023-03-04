@@ -25,6 +25,7 @@
     "next-sitemap": "^3.1.48",
     "nextjs-google-analytics": "^2.3.0",
     "react": "18.2.0",
+    "react-accessible-accordion": "^5.0.0",
     "react-dom": "18.2.0",
     "react-howler": "^5.2.0",
     "react-use-audio-player": "^1.2.6",
