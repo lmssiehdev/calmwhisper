@@ -30,9 +30,9 @@ export default function RootLayout({
       */}
       <head></head>
       <body
-        className={`${Avenir.variable} font-sans min-h-[100vh] px-2 !mx-auto bg-[#393E46] text-white relative`}
+        className={`${Avenir.variable} font-sans px-2 !mx-auto bg-[#393E46] text-white relative`}
       >
-        {children}
+        <div className="flex flex-col min-h-[100vh]">{children}</div>
         <AnalyticsWrapper />
       </body>
     </html>
