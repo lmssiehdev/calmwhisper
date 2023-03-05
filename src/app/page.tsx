@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import AccordionEle from "../components/AccordianEle";
 
 const features = [
   {
@@ -89,6 +90,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <AccordionEle />
       <Footer />
     </>
   );
