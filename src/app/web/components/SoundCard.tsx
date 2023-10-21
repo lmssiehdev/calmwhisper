@@ -63,6 +63,7 @@ export default function SoundCard({ item }: Props) {
               <ReactHowler
                 playing={!isMute}
                 src={sound}
+                html5={true}
                 volume={currentSoundsPlaying[name]?.volume}
                 loop={true}
               />
