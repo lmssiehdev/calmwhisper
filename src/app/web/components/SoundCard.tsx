@@ -3,7 +3,7 @@
 import { useSoundContext } from "@/context/soundContext";
 import classNames from "classnames";
 import ReactHowler from "react-howler";
-import VolumeSlider from "./VolumeSlider";
+import { Slider } from "./VolumeSlider";
 import { useState } from "react";
 
 type Props = {
@@ -12,7 +12,6 @@ type Props = {
 
 export default function SoundCard({ item }: Props) {
   const { name, sound, icon } = item;
-  const [isHovered, setIsHovered] = useState(false);
   const { currentSoundsPlaying, dispatch, isMute } = useSoundContext();
 
   const handleIconClick = () => {
@@ -30,13 +29,10 @@ export default function SoundCard({ item }: Props) {
           <button
             className={classNames(
               {
-                "opacity-60":
-                  !isHovered && !currentSoundsPlaying[name]?.isPlaying,
+                "opacity-60": !currentSoundsPlaying[name]?.isPlaying,
               },
               "inline-block w-full cursor-pointer"
             )}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             onClick={handleIconClick}
           >
             {/*             
@@ -58,9 +54,11 @@ export default function SoundCard({ item }: Props) {
         >
           {currentSoundsPlaying[name]?.isPlaying && (
             <>
-              <VolumeSlider
-                value={currentSoundsPlaying[name]?.volume}
-                handleValueChange={handleVolumeChange}
+              <Slider
+                value={[currentSoundsPlaying[name]?.volume]}
+                onValueChange={(v) => handleVolumeChange(v[0])}
+                defaultValue={[currentSoundsPlaying[name]?.volume]}
+                className="my-1"
               />
               <ReactHowler
                 playing={!isMute}

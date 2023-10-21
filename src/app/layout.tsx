@@ -23,12 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
-      <head></head>
       <body
         className={`${Avenir.variable} font-sans px-2 !mx-auto bg-[#393E46] text-white relative`}
       >

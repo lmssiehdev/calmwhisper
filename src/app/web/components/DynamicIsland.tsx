@@ -1,72 +1,91 @@
 "use client";
 
 import Page from "@/components/Favorites";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/Dialog";
+import { Input } from "@/components/ui/Input";
+import { Label } from "@/components/ui/Label";
 import { useSoundContext } from "@/context/soundContext";
-import { TPlayingSounds, useFavoritesStore } from "@/stores/FavoritesStore";
+import { useFavoritesStore } from "@/stores/FavoritesStore";
 import {
   HeartIcon,
   PauseIcon,
   PlayIcon,
   StarIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/solid";
-import * as Dialog from "@radix-ui/react-dialog";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PwaInstallButton from "./PwaInstallButton";
-import { Button } from "./ui/Button";
+import { Button } from "@/components/ui/Button";
+import Favorites from "@/components/Favorites";
+import Modal from "@/components/Modal";
 
-function DialogDemo({
-  title,
-  dialogTrigger,
-  dialogAction,
-}: {
-  title: string;
-  dialogTrigger: JSX.Element;
-  dialogAction: JSX.Element;
-}) {
-  const [isOpen, setIsOpen] = useState(false);
+function AddFavorite({ onClose }: { onClose?: (name: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
 
-  const close = () => {
-    setIsOpen(false);
-  };
+  function handleSubmit() {
+    if (name === "") return;
+    onClose && onClose(name.trim());
+    setOpen(false);
+  }
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Dialog.Trigger asChild>{dialogTrigger}</Dialog.Trigger>
-      <Dialog.Portal>
-        <Dialog.Overlay className="DialogOverlay " />
-        <Dialog.Content className=" text-white bg-[#393E46] outline-none z-20 rounded fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[90vw] max-w-[450px] max-h-[85vh] p-5 shadow-md focus:outline-none">
-          <div className="flex items-center justify-between">
-            <Dialog.Title className="m-0 font-bold text-lg">
-              {title}
-            </Dialog.Title>
-            <Dialog.Close asChild>
-              <Button
-                color="primary"
-                size="sm"
-                className="bg-inherit hover:bg-white/10 rounded-full shadow-none"
-                aria-label="Close"
-              >
-                <XMarkIcon className="h-5 w-5text-white" />
-              </Button>
-            </Dialog.Close>
+    <div>
+      <button
+        className="flex items-center justify-center"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <StarIcon className="h-5 w-5" />
+      </button>
+      <Modal showModal={open} setShowModal={setOpen}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">
+                Name
+              </Label>
+              <Input
+                autoComplete="off"
+                id="name"
+                className="col-span-3"
+                value={name}
+                onChange={({ target }) => {
+                  setName(target.value ?? "Playlist");
+                }}
+              />
+            </div>
           </div>
 
-          <Dialog.Overlay style={{ maxHeight: "300px", overflowY: "auto" }}>
-            {React.isValidElement(dialogAction) &&
-              // Todo: fix ts
-              // @ts-ignore
-              React.cloneElement(dialogAction, { title, close })}
-          </Dialog.Overlay>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+          <DialogFooter>
+            <Button type="button" variant="ghost">
+              Close
+            </Button>
+            <Button type="submit" variant="outline">
+              Save changes
+            </Button>
+          </DialogFooter>
+        </form>
+      </Modal>
+    </div>
   );
 }
 
-function AddFavorite({ title, close }: { title: string; close?: () => {} }) {
-  const { currentSoundsPlaying, setCurrentPlaylistName } = useSoundContext();
+function AddFavorite_({ title, close }: { title: string; close?: () => {} }) {
   const [name, setName] = useState("");
+  const { currentSoundsPlaying, setCurrentPlaylistName } = useSoundContext();
   const [error, setError] = useState<string | null>(null);
   const addFavorite = useFavoritesStore((state) => state.addFavorite);
 
@@ -111,7 +130,7 @@ function AddFavorite({ title, close }: { title: string; close?: () => {} }) {
       </fieldset>
       <div className="text-center text-red-400">{error}</div>
       <div className="flex justify-end mt-7">
-        <Button size="base" color="primary" onClick={handleClose}>
+        <Button size="lg" variant="default" onClick={handleClose}>
           Save Change
         </Button>
       </div>
@@ -119,22 +138,23 @@ function AddFavorite({ title, close }: { title: string; close?: () => {} }) {
   );
 }
 
-function FavoritesDialog({
-  title,
-  close,
-}: {
-  title: string;
-  close?: () => {};
-}) {
-  return <Page closeModal={close} />;
-}
-
 export default function IslandContent() {
-  const { isMute, currentPlaylistName, dispatch, currentSoundsPlaying } =
-    useSoundContext();
+  const {
+    isMute,
+    currentPlaylistName,
+    dispatch,
+    currentSoundsPlaying,
+    setCurrentPlaylistName,
+  } = useSoundContext();
+  const addFavorite = useFavoritesStore((state) => state.addFavorite);
 
   function setIsMute(value: boolean) {
     dispatch({ type: "MUTE_SOUNDS", value });
+  }
+
+  function handleAddFavorite(name: string) {
+    addFavorite(name, currentSoundsPlaying);
+    setCurrentPlaylistName(name);
   }
 
   return (
@@ -158,16 +178,10 @@ export default function IslandContent() {
             </>
           )}
 
-          <DialogDemo
-            title="Add To Favorite"
-            dialogTrigger={<StarIcon className="h-5 w-5" />}
-            dialogAction={<AddFavorite title="Add To Favorite" />}
-          />
-          <DialogDemo
-            title="Favorites"
-            dialogTrigger={<HeartIcon className="h-5 w-5" />}
-            dialogAction={<FavoritesDialog title="Favorites" />}
-          />
+          <AddFavorite onClose={handleAddFavorite} />
+
+          <Favorites />
+
           <PwaInstallButton />
         </div>
       </div>
