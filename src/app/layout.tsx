@@ -2,6 +2,13 @@ import Navbar from "@/components/Navbar";
 import "./global.css";
 import localFont from "@next/font/local";
 import { AnalyticsWrapper } from "@/components/Analytics";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Calm Whisper: Ambient Sounds for Deep Focus",
+  description:
+    "Free online background noise generator to help you focus, study, and sleep.",
+};
 
 const Avenir = localFont({
   variable: "--font-avenir",
