@@ -17,13 +17,7 @@ import { TPlayingSounds, useFavoritesStore } from "@/stores/FavoritesStore";
 import { HeartIcon, PlayIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 
-function Favorites({
-  trigger,
-  onClose,
-}: {
-  trigger: React.ReactNode;
-  onClose?: () => void;
-}) {
+function Favorites({ onClose }: { onClose?: () => void }) {
   const [open, setOpen] = useState(false);
 
   const deleteFavorite = useFavoritesStore((state) => state.deleteFavorite);
@@ -44,7 +38,7 @@ function Favorites({
       >
         <HeartIcon className="h-5 w-5" />
       </button>
-      <Modal showModal={open} setShowModal={setOpen}>
+      <Modal showModal={open} setShowModal={setOpen} title="Favorites">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -71,12 +65,13 @@ function Favorites({
           )}
 
           <DialogFooter>
-            <Button type="button" variant="outline">
-              Close
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setOpen(false)}
+            >
+              Cancel
             </Button>
-            {/* <Button type="submit" variant="outline">
-              Save changes
-            </Button> */}
           </DialogFooter>
         </form>
       </Modal>

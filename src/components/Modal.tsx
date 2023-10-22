@@ -19,6 +19,7 @@ type Props = {
   showModal?: boolean;
   setShowModal?: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  title?: string;
 };
 export default function Modal({
   children,
@@ -26,6 +27,7 @@ export default function Modal({
   showModal,
   setShowModal,
   dialogOnly = false,
+  title,
 }: Props) {
   const { isMobile } = useMediaQuery();
   const [snap, setSnap] = useState<number | string | null>("148px");
@@ -87,12 +89,13 @@ export default function Modal({
       <Dialog open={showModal} onOpenChange={setShowModal}>
         {/* <DialogTrigger>{trigger}</DialogTrigger> */}
         <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription>
-          </DialogHeader>
+          {title && (
+            <DialogHeader>
+              <div className="flex flex-col space-y-1.5 text-center sm:text-left">
+                {title}
+              </div>
+            </DialogHeader>
+          )}
           {children}
         </DialogContent>
       </Dialog>
