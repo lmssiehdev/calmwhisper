@@ -14,8 +14,8 @@ export default function Page() {
         </p>
 
         <p>
-          which is I decided create Calm Whisper. I hope you find it as useful
-          as I have.
+          which is why I decided create Calm Whisper. I hope you find it as
+          useful as I have.
         </p>
         <p>
           If you have any suggestions, stumble upon a bug, or simply want to
