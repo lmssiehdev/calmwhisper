@@ -15,7 +15,10 @@ function Navbar() {
             </li>
             <li>
               <Button asChild variant="outline" size="sm" className="gap-2">
-                <a href="#" target="_blank">
+                <a
+                  href="https://github.com/lmssiehdev/calmwhisper"
+                  target="_blank"
+                >
                   <svg
                     className="text-white h-4 w-4 "
                     aria-hidden="true"
