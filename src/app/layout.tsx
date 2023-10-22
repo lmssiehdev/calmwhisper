@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: "Calm Whisper: Ambient Sounds for Deep Focus",
   description:
     "Free online background noise generator to help you focus, study, and sleep.",
+  openGraph: {
+    type: "website",
+    url: "https://calmwhisper.com",
+    title: "Calm Whisper",
+    images: [{ url: "/public/images/og.jpg" }],
+  },
 };
 
 const Avenir = localFont({
