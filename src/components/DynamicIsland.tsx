@@ -1,31 +1,16 @@
 "use client";
 
-import Page from "@/components/Favorites";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/Dialog";
+import { DialogFooter } from "@/components/Dialog";
+import Favorites from "@/components/Favorites";
+import Modal from "@/components/Modal";
+import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { useSoundContext } from "@/context/soundContext";
 import { useFavoritesStore } from "@/stores/FavoritesStore";
-import {
-  HeartIcon,
-  PauseIcon,
-  PlayIcon,
-  StarIcon,
-} from "@heroicons/react/24/solid";
+import { PauseIcon, PlayIcon, StarIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
-import PwaInstallButton from "./PwaInstallButton";
-import { Button } from "@/components/ui/Button";
-import Favorites from "@/components/Favorites";
-import Modal from "@/components/Modal";
+import PwaInstallButton from "../app/web/components/PwaInstallButton";
 
 function AddFavorite({ onClose }: { onClose?: (name: string) => void }) {
   const [open, setOpen] = useState(false);
@@ -45,7 +30,7 @@ function AddFavorite({ onClose }: { onClose?: (name: string) => void }) {
       >
         <StarIcon className="h-5 w-5" />
       </button>
-      <Modal showModal={open} setShowModal={setOpen}>
+      <Modal showModal={open} setShowModal={setOpen} title="Add to Favorites">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -69,14 +54,23 @@ function AddFavorite({ onClose }: { onClose?: (name: string) => void }) {
             </div>
           </div>
 
-          <DialogFooter>
-            <Button type="button" variant="ghost">
-              Close
+          <div className="flex lg:flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+            <Button
+              className="flex-1 md:flex-initial"
+              type="button"
+              variant="ghost"
+              onClick={() => setOpen(false)}
+            >
+              Cancel
             </Button>
-            <Button type="submit" variant="outline">
-              Save changes
+            <Button
+              className="flex-1 md:flex-initial"
+              type="submit"
+              variant="default"
+            >
+              Add
             </Button>
-          </DialogFooter>
+          </div>
         </form>
       </Modal>
     </div>

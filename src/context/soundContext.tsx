@@ -14,6 +14,7 @@ interface ISoundContext {
   currentSoundsPlaying: TPlayingSounds;
   currentPlaylistName: string;
   setCurrentPlaylistName: (name: string) => void;
+  handleVolumeChange: (name: string, volume: number) => void;
   dispatch: Dispatch<TAction>;
 }
 
@@ -94,9 +95,14 @@ function reducer(state: typeof initialState, action: TAction) {
 function SoundProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const handleVolumeChange = (name: string, volume: number) => {
+    dispatch({ type: "UPDATE_VOLUME", name, volume });
+  };
+
   return (
     <soundContext.Provider
       value={{
+        handleVolumeChange,
         isMute: state.isMute,
         currentSoundsPlaying: state.currentSoundsPlaying,
         currentPlaylistName: state.currentPlaylistName,

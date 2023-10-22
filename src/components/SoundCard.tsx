@@ -1,25 +1,34 @@
 "use client";
 
+import { Slider } from "@/components/ui/Slider";
 import { useSoundContext } from "@/context/soundContext";
+import { soundData } from "@/soundData";
 import classNames from "classnames";
 import ReactHowler from "react-howler";
-import { Slider } from "./VolumeSlider";
-import { useState } from "react";
 
 type Props = {
   item: any;
 };
 
-export default function SoundCard({ item }: Props) {
+export default function SoundGrid() {
+  return (
+    <>
+      <div className=" max-w-[900px] grid grid-cols-2 md:grid-cols-4 mx-auto gap-8">
+        {soundData.map((item, index) => (
+          <SoundCard key={index} item={item} />
+        ))}
+      </div>
+    </>
+  );
+}
+
+export function SoundCard({ item }: Props) {
   const { name, sound, icon } = item;
-  const { currentSoundsPlaying, dispatch, isMute } = useSoundContext();
+  const { currentSoundsPlaying, dispatch, isMute, handleVolumeChange } =
+    useSoundContext();
 
   const handleIconClick = () => {
     dispatch({ type: "TOGGLE_SOUND", name });
-  };
-
-  const handleVolumeChange = (volume: number) => {
-    dispatch({ type: "UPDATE_VOLUME", name, volume });
   };
 
   return (
@@ -56,7 +65,7 @@ export default function SoundCard({ item }: Props) {
             <>
               <Slider
                 value={[currentSoundsPlaying[name]?.volume]}
-                onValueChange={(v) => handleVolumeChange(v[0])}
+                onValueChange={(v) => handleVolumeChange(name, v[0])}
                 defaultValue={[currentSoundsPlaying[name]?.volume]}
                 className="my-1"
                 min={0}
