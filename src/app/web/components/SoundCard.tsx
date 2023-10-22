@@ -59,6 +59,9 @@ export default function SoundCard({ item }: Props) {
                 onValueChange={(v) => handleVolumeChange(v[0])}
                 defaultValue={[currentSoundsPlaying[name]?.volume]}
                 className="my-1"
+                min={0}
+                max={1}
+                step={0.1}
               />
               <ReactHowler
                 playing={!isMute}
