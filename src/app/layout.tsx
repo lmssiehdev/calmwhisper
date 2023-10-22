@@ -31,14 +31,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
       <body
-        className={`${Avenir.variable} font-sans px-2 !mx-auto bg-[#393E46] text-white relative`}
+        className={`${Avenir.variable} font-sans px-2 !mx-auto bg-[#393E46] bg-background text-white relative max-w-screen-lg min-h-screen w-full `}
       >
-        <div className="flex flex-col min-h-[100vh]">{children}</div>
+        <Navbar />
+        {children}
         <AnalyticsWrapper />
       </body>
     </html>
