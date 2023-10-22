@@ -1,8 +1,8 @@
 "use client";
 
-import { DialogFooter } from "@/components/Dialog";
 import Favorites from "@/components/Favorites";
 import Modal from "@/components/Modal";
+import PwaInstallButton from "@/components/PwaInstallButton";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
@@ -10,15 +10,32 @@ import { useSoundContext } from "@/context/soundContext";
 import { useFavoritesStore } from "@/stores/FavoritesStore";
 import { PauseIcon, PlayIcon, StarIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
-import PwaInstallButton from "../app/web/components/PwaInstallButton";
 
 function AddFavorite({ onClose }: { onClose?: (name: string) => void }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
+  const [error, setError] = useState("");
+  const { currentSoundsPlaying, setCurrentPlaylistName } = useSoundContext();
+  const addFavorite = useFavoritesStore((state) => state.addFavorite);
 
   function handleSubmit() {
-    if (name === "") return;
-    onClose && onClose(name.trim());
+    setError("");
+    // if (name === "") return;
+    // onClose && onClose(name.trim());
+
+    if (name.length == 0) {
+      setError("Please provide a name.");
+      return;
+    }
+
+    if (Object.keys(currentSoundsPlaying).length == 0) {
+      setError("Please select at least one sound.");
+      return;
+    }
+    addFavorite(name, currentSoundsPlaying);
+    setCurrentPlaylistName(name);
+
+    onClose && onClose(name);
     setOpen(false);
   }
 
@@ -54,7 +71,7 @@ function AddFavorite({ onClose }: { onClose?: (name: string) => void }) {
             </div>
           </div>
 
-          <div className="flex lg:flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+          <div className="flex lg:flex-none sm:flex-row sm:justify-end sm:space-x-2">
             <Button
               className="flex-1 md:flex-initial"
               type="button"
@@ -67,10 +84,12 @@ function AddFavorite({ onClose }: { onClose?: (name: string) => void }) {
               className="flex-1 md:flex-initial"
               type="submit"
               variant="default"
+              onClick={handleSubmit}
             >
               Add
             </Button>
           </div>
+          {error && <div className="text-destructive">{error}</div>}
         </form>
       </Modal>
     </div>
@@ -146,10 +165,10 @@ export default function IslandContent() {
     dispatch({ type: "MUTE_SOUNDS", value });
   }
 
-  function handleAddFavorite(name: string) {
-    addFavorite(name, currentSoundsPlaying);
-    setCurrentPlaylistName(name);
-  }
+  // function handleAddFavorite(name: string) {
+  //   addFavorite(name, currentSoundsPlaying);
+  //   setCurrentPlaylistName(name);
+  // }
 
   return (
     <>
@@ -172,7 +191,7 @@ export default function IslandContent() {
             </>
           )}
 
-          <AddFavorite onClose={handleAddFavorite} />
+          <AddFavorite onClose={() => {}} />
 
           <Favorites />
 

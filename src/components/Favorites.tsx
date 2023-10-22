@@ -70,7 +70,7 @@ function Favorites({ onClose }: { onClose?: () => void }) {
               variant="outline"
               onClick={() => setOpen(false)}
             >
-              Cancel
+              Close
             </Button>
           </DialogFooter>
         </form>
