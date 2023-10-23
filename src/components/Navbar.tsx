@@ -18,6 +18,7 @@ function Navbar() {
                 <a
                   href="https://github.com/lmssiehdev/calmwhisper"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <svg
                     className="text-white h-4 w-4 "

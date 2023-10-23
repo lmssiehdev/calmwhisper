@@ -24,6 +24,7 @@ export default function Page() {
             className="hover:accent inline-flex items-center justify-center gap-1 underline-offset-4 hover:text-primary/90"
             href={FEEDBACK_FORM}
             target="_blank"
+            rel="noreferrer"
           >
             feedback form <ArrowUpRightIcon className="h-3 w-3" />
           </a>{" "}
@@ -32,6 +33,7 @@ export default function Page() {
             className="hover:accent inline-flex items-center justify-center gap-1 underline-offset-4 hover:text-primary/90"
             href="https://github.com/lmssiehdev/calmwhisper"
             target="_blank"
+            rel="noreferrer"
           >
             GitHub <ArrowUpRightIcon className="h-3 w-3" />
           </a>
