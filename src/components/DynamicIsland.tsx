@@ -172,7 +172,7 @@ export default function IslandContent() {
 
   return (
     <>
-      <div className=" bg-orange-500 text-white m-auto rounded-full py-2 px-4 flex items-center justify-between z-20">
+      <div className="bg-transparent border border-input text-white py-2 px-4 flex items-center justify-between z-20">
         {currentPlaylistName}
         <div className="flex items-center gap-6 md:gap-2">
           {Object.keys(currentSoundsPlaying).some(
