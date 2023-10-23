@@ -2,8 +2,8 @@
 
 import { Slider } from "@/components/ui/Slider";
 import { useSoundContext } from "@/context/soundContext";
+import { cn } from "@/lib/utils";
 import { soundData } from "@/soundData";
-import classNames from "classnames";
 import ReactHowler from "react-howler";
 
 type Props = {
@@ -36,7 +36,7 @@ export function SoundCard({ item }: Props) {
       <div className="select-none flex flex-col p-4 justify-center items-center">
         <div className="w-[65px]">
           <button
-            className={classNames(
+            className={cn(
               {
                 "opacity-60": !currentSoundsPlaying[name]?.isPlaying,
               },
@@ -56,7 +56,7 @@ export function SoundCard({ item }: Props) {
           </button>
         </div>
         <div
-          className={classNames(
+          className={cn(
             { invisible: !currentSoundsPlaying[name] },
             "w-full pt-3 max-w-[100px] h-10"
           )}
