@@ -15,8 +15,8 @@ dependencies:
     specifier: ^13.1.2
     version: 13.1.2
   '@radix-ui/colors':
-    specifier: ^0.1.8
-    version: 0.1.8
+    specifier: ^3.0.0
+    version: 3.0.0
   '@radix-ui/react-dialog':
     specifier: ^1.0.2
     version: 1.0.2(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
@@ -1747,8 +1747,8 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@radix-ui/colors@0.1.8:
-    resolution: {integrity: sha512-jwRMXYwC0hUo0mv6wGpuw254Pd9p/R6Td5xsRpOmaWkUHlooNWqVcadgyzlRumMq3xfOTXwJReU0Jv+EIy4Jbw==}
+  /@radix-ui/colors@3.0.0:
+    resolution: {integrity: sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg==}
     dev: false
 
   /@radix-ui/number@1.0.0:

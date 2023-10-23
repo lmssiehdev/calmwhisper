@@ -13,7 +13,7 @@
     "@ducanh2912/next-pwa": "^7.3.2",
     "@heroicons/react": "^2.0.13",
     "@next/font": "^13.1.2",
-    "@radix-ui/colors": "^0.1.8",
+    "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slider": "^1.1.0",
