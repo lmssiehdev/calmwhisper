@@ -1,4 +1,6 @@
-import Navbar from "@/components/Navbar";
+import DynamicIsland from "@/components/DynamicIsland";
+import App from "@/components/SoundCard";
+import { SoundProvider } from "@/context/soundContext";
 import {
   AdjustmentsHorizontalIcon,
   ArrowSmallRightIcon,
@@ -8,7 +10,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
-import AccordionEle from "../components/AccordianEle";
 
 const features = [
   {
@@ -47,18 +48,30 @@ const features = [
 export default function Home() {
   return (
     <>
-      <div className="max-w-[1200px] mx-auto">
-        <Navbar />
+      <div className="max-w-xl w-full mx-auto">
+        <SoundProvider>
+          <div className="mt-5 mb-10">
+            <DynamicIsland />
+          </div>
+          <App />
+        </SoundProvider>
       </div>
+    </>
+  );
+}
+
+function Content() {
+  return (
+    <>
       <header className="my-16 text-center overflow-hidden border-b-4 border-solid border-orange-500">
         <h1 className=" text-3xl md:leading-snug font-bold md:text-5xl ">
           Escape the Noise,
           <br /> Create your own Soundscape.
         </h1>
         {/* <p className="my-8 mx-auto max-w-[300px] md:max-w-[600px]">
-          Mix and match high-quality nature sounds to create your perfect
-          ambiance
-        </p> */}
+      Mix and match high-quality nature sounds to create your perfect
+      ambiance
+    </p> */}
         <Link
           href="/web"
           className="mx-auto my-12 cursor-pointer inline-flex items-center gap-2 rounded bg-orange-500 hover:bg-orange-400 hover:shadow-md font-bold  py-3 px-4 text-white shadow-sm shadow-gray-800"
@@ -90,7 +103,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <AccordionEle />
+      {/* <AccordionEle /> */}
       <Footer />
     </>
   );
