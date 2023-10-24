@@ -32,7 +32,7 @@ function Navbar() {
                       fill="currentColor"
                     ></path>
                   </svg>{" "}
-                  github
+                  Star on GitHub
                 </a>
               </Button>
             </li>
