@@ -6,18 +6,6 @@ export default function Page() {
     <div className="prose-invert prose no-prose mx-auto">
       <div>
         <p>
-          I was surprised by the poor quality of ambient noise apps available in
-          the market. They either deliver low-quality sounds with noticeable
-          gaps in the loops or impose extremely short time limits on listening.
-          This is a real problem for me, given that I'm a developer who spends
-          the majority of my time glued to the computer.
-        </p>
-
-        <p>
-          which is why I decided create Calm Whisper. I hope you find it as
-          useful as I have.
-        </p>
-        <p>
           If you have any suggestions, stumble upon a bug, or simply want to
           drop me a few kind words, you can get in touch using the{" "}
           <a
@@ -44,6 +32,25 @@ export default function Page() {
       <div>
         <h3>Credits:</h3>
         <p>Icons credits go to https://icons8.com</p>
+        <p>
+          Initial sounds sourced from{" "}
+          <a
+            href="https://github.com/rafaelmardojai/blanket/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Blanket
+          </a>
+          , sound licensing details in their{" "}
+          <a
+            href="https://github.com/rafaelmardojai/blanket/blob/master/SOUNDS_LICENSING.md"
+            target="_blank"
+            rel="noreferrer"
+          >
+            repo
+          </a>
+          .
+        </p>
       </div>
     </div>
   );
