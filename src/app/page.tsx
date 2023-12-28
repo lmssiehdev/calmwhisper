@@ -3,12 +3,9 @@ import App from "@/components/SoundCard";
 import { SoundProvider } from "@/context/soundContext";
 import {
   AdjustmentsHorizontalIcon,
-  ArrowSmallRightIcon,
   BuildingLibraryIcon,
   ClockIcon,
 } from "@heroicons/react/24/solid";
-import Image from "next/image";
-import Link from "next/link";
 import Footer from "../components/Footer";
 
 const features = [
@@ -56,6 +53,7 @@ export default function Home() {
           <App />
         </SoundProvider>
       </div>
+      {/* <Content /> */}
     </>
   );
 }
@@ -63,15 +61,15 @@ export default function Home() {
 function Content() {
   return (
     <>
-      <header className="my-16 text-center overflow-hidden border-b-4 border-solid border-orange-500">
+      {/* <header className="my-16 text-center overflow-hidden border-b-4 border-solid border-orange-500">
         <h1 className=" text-3xl md:leading-snug font-bold md:text-5xl ">
           Escape the Noise,
           <br /> Create your own Soundscape.
         </h1>
-        {/* <p className="my-8 mx-auto max-w-[300px] md:max-w-[600px]">
+    <p className="my-8 mx-auto max-w-[300px] md:max-w-[600px]">
       Mix and match high-quality nature sounds to create your perfect
       ambiance
-    </p> */}
+    </p> 
         <Link
           href="/web"
           className="mx-auto my-12 cursor-pointer inline-flex items-center gap-2 rounded bg-orange-500 hover:bg-orange-400 hover:shadow-md font-bold  py-3 px-4 text-white shadow-sm shadow-gray-800"
@@ -86,8 +84,8 @@ function Content() {
             fill
           />
         </div>
-      </header>
-      <section className="my-40 max-w-[1200px] mx-auto">
+      </header> */}
+      <section className="max-w-[1200px] mx-auto mb-40">
         <h2 className="pb-10 text-4xl font-bold text-center">Features</h2>
         <div className="">
           <div className="mx-auto max-w-[500px] md:max-w-none md:grid grid-cols-3 gap-4">
