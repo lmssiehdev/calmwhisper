@@ -76,6 +76,7 @@ export function SoundCard({ item }: Props) {
                 playing={!isMute}
                 src={sound}
                 volume={currentSoundsPlaying[name]?.volume}
+                html5={true}
                 loop={true}
               />
             </>
