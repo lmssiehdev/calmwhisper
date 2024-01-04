@@ -13,6 +13,7 @@ export function ProductHunt() {
       href="https://www.producthunt.com/posts/calm-whisper?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-calm&#0045;whisper"
       className="animate-tiny-bounce block"
       target="_blank"
+      rel="noreferrer"
     >
       <img
         src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=432787&theme=dark"
