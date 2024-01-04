@@ -83,6 +83,9 @@ dependencies:
   typescript:
     specifier: 4.9.4
     version: 4.9.4
+  use-local-storage-state:
+    specifier: ^19.1.0
+    version: 19.1.0(react-dom@18.2.0)(react@18.2.0)
   vaul:
     specifier: ^0.7.5
     version: 0.7.5(@types/react-dom@18.0.10)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
@@ -6147,6 +6150,17 @@ packages:
       '@types/react': 18.2.20
       react: 18.2.0
       tslib: 2.5.0
+    dev: false
+
+  /use-local-storage-state@19.1.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-3Ea6uRtRaSwpZYD9maZPKoEEGRuHmVA7zGrV/Uh9s5NTj9K1x/MB4IOQoywjUesQyhXmJq6bqjC5cAqlsXoOTw==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /use-sidecar@1.1.2(@types/react@18.2.20)(react@18.2.0):

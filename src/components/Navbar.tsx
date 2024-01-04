@@ -1,3 +1,4 @@
+import { ProductHunt } from "@/components/ProductHunt";
 import { buttonVariants } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
@@ -12,6 +13,9 @@ function Navbar() {
         </h1>
         <nav>
           <ul className="flex gap-4 items-center">
+            <li>
+              <ProductHunt />
+            </li>
             <li>
               <a
                 className={cn(
